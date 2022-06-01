@@ -6,7 +6,7 @@ import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
 import Image from 'next/image'
 import styled, { keyframes } from 'styled-components'
-import bunnyImage from '../../../../public/images/home/lunar-bunny/bunny@2x.png'
+import asixplusImage from '../../../../public/asixplus/home/home-logo/main-logo.png'
 import CompositeImage, { CompositeImageProps } from './CompositeImage'
 import { SlideSvgDark, SlideSvgLight } from './SlideSvg'
 
@@ -15,7 +15,7 @@ const flyingAnim = () => keyframes`
     transform: translate(0,  0px);
   }
   50% {
-    transform: translate(-5px, -5px);
+    transform: translate(0px, -35px);
   }
   to {
     transform: translate(0, 0px);
@@ -129,7 +129,7 @@ const Hero = () => {
           position="relative"
         >
           <BunnyWrapper>
-            <Image src={bunnyImage} priority placeholder="blur" alt={t('Lunar bunny')} />
+            <Image src={asixplusImage} priority placeholder="blur" alt={t('Asixplus Logo')} />
           </BunnyWrapper>
           <StarsWrapper>
             <CompositeImage {...starsImage} />

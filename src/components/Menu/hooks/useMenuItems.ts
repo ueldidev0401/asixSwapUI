@@ -5,15 +5,12 @@ import { useMenuItemsStatus } from './useMenuItemsStatus'
 import config, { ConfigMenuItemsType } from '../config/config'
 
 export const useMenuItems = (): ConfigMenuItemsType[] => {
-  const {
-    t,
-    currentLanguage: { code: languageCode },
-  } = useTranslation()
+  const { t } = useTranslation()
   const menuItemsStatus = useMenuItemsStatus()
 
   const menuItems = useMemo(() => {
-    return config(t, languageCode)
-  }, [t, languageCode])
+    return config(t)
+  }, [t])
 
   return useMemo(() => {
     if (menuItemsStatus && Object.keys(menuItemsStatus).length) {

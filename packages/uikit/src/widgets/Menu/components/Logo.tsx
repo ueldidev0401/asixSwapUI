@@ -48,10 +48,10 @@ const Logo: React.FC<Props> = ({ href }) => {
   const innerLogo = (
     <>
       <div className="mobile-icon">
-        <img src="/asixplus/logo-home/logo-mobile.png" alt="Asixplus home page" />
+        <img src="/asixplus/topbar-logo/logo-mobile.png" alt="Asixplus home page" />
       </div>
       <div className="desktop-icon">
-        <img src="/asixplus/logo-home/logo-desktop.png" alt="Asixplus home page" />
+        <img src="/asixplus/topbar-logo/logo-desktop.png" alt="Asixplus home page" />
       </div>
     </>
   );
