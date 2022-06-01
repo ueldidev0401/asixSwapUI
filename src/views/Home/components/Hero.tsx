@@ -109,10 +109,12 @@ const Hero = () => {
       >
         <Flex flex="1" flexDirection="column">
           <Heading scale="xxl" color="secondary" mb="24px">
-            {t('The moon is made of pancakes.')}
+            {t('ASIXMUSIC Token')}
           </Heading>
           <Heading scale="md" mb="24px">
-            {t('Trade, earn, and win crypto on the most popular decentralized platform in the galaxy.')}
+            {t(
+              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!',
+            )}
           </Heading>
           <Flex>
             {!account && <ConnectWalletButton mr="8px" />}
