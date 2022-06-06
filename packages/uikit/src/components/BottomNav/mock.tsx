@@ -22,16 +22,16 @@ const MenuItemsMock: MenuItemsType[] = [
     showItemsOnMobile: false,
   },
   {
-    label: "Earn",
-    href: "/earn",
+    label: "Farm",
+    href: "/farm",
     icon: EarnIcon,
     fillIcon: EarnFillIcon,
     items: ItemsMock,
     showItemsOnMobile: true,
   },
   {
-    label: "Gagnez des jetons",
-    href: "/win",
+    label: "Bridge",
+    href: "/bridge",
     icon: TrophyIcon,
     fillIcon: TrophyFillIcon,
     items: ItemsMock,
@@ -43,13 +43,6 @@ const MenuItemsMock: MenuItemsType[] = [
     icon: NftIcon,
     fillIcon: NftFillIcon,
     items: ItemsMock,
-  },
-  {
-    label: "More",
-    href: "/more",
-    icon: MoreIcon,
-    items: ItemsMock,
-    showItemsOnMobile: true,
   },
 ];
 
