@@ -369,42 +369,13 @@ export default function Presale() {
   return (
     <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
       <Flex width="100%" justifyContent="center" position="relative">
-        {!isMobile && (
-          <PriceChartContainer
-            inputCurrencyId={inputCurrencyId}
-            inputCurrency={currencies[Field.INPUT]}
-            outputCurrencyId={outputCurrencyId}
-            outputCurrency={currencies[Field.OUTPUT]}
-            isChartExpanded={isChartExpanded}
-            setIsChartExpanded={setIsChartExpanded}
-            isChartDisplayed={isChartDisplayed}
-            currentSwapPrice={singleTokenPrice}
-          />
-        )}
-        <BottomDrawer
-          content={
-            <PriceChartContainer
-              inputCurrencyId={inputCurrencyId}
-              inputCurrency={currencies[Field.INPUT]}
-              outputCurrencyId={outputCurrencyId}
-              outputCurrency={currencies[Field.OUTPUT]}
-              isChartExpanded={isChartExpanded}
-              setIsChartExpanded={setIsChartExpanded}
-              isChartDisplayed={isChartDisplayed}
-              currentSwapPrice={singleTokenPrice}
-              isMobile
-            />
-          }
-          isOpen={isChartDisplayed}
-          setIsOpen={setIsChartDisplayed}
-        />
         <Flex flexDirection="column">
           <StyledSwapContainer $isChartExpanded={isChartExpanded}>
             <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'}>
               <AppBody>
                 <CurrencyInputHeader
-                  title={t('Swap')}
-                  subtitle={t('Trade tokens in an instant')}
+                  title={t('Presale')}
+                  subtitle={t('Buy ASIXMUSIC TOKEN')}
                   setIsChartDisplayed={setIsChartDisplayed}
                   isChartDisplayed={isChartDisplayed}
                   hasAmount={hasAmount}
