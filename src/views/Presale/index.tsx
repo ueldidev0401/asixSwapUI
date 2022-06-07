@@ -1,34 +1,18 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { CurrencyAmount, JSBI, Token, Trade } from '@pancakeswap/sdk'
-import {
-  Button,
-  Text,
-  ArrowDownIcon,
-  Box,
-  useModal,
-  Flex,
-  IconButton,
-  BottomDrawer,
-  useMatchBreakpoints,
-  ArrowUpDownIcon,
-  Skeleton,
-} from '@pancakeswap/uikit'
+import { Button, Text, ArrowDownIcon, Box, useModal, Flex, IconButton, useMatchBreakpoints } from '@pancakeswap/uikit'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
-import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter'
-import Footer from 'components/Menu/Footer'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'contexts/Localization'
-import { EXCHANGE_DOCS_URLS } from 'config/constants'
 import { maxAmountSpend } from 'utils/maxAmountSpend'
 import { computeTradePriceBreakdown, warningSeverity } from 'utils/prices'
 import shouldShowSwapWarning from 'utils/shouldShowSwapWarning'
 import useRefreshBlockNumberID from './hooks/useRefreshBlockNumber'
-import AddressInputPanel from './components/AddressInputPanel'
 import { GreyCard } from '../../components/Card'
 import Column, { AutoColumn } from '../../components/Layout/Column'
 import ConfirmSwapModal from './components/ConfirmSwapModal'
-import CurrencyInputPanel from '../../components/CurrencyInputPanel'
+import PresaleCurrencyInputPanel from '../../components/PresaleCurrencyInputPanel'
 import { AutoRow, RowBetween } from '../../components/Layout/Row'
 import AdvancedSwapDetailsDropdown from './components/AdvancedSwapDetailsDropdown'
 import confirmPriceImpactWithoutFee from './components/confirmPriceImpactWithoutFee'
@@ -60,7 +44,6 @@ import {
 import CircleLoader from '../../components/Loader/CircleLoader'
 import Page from '../Page'
 import SwapWarningModal from './components/SwapWarningModal'
-import PriceChartContainer from './components/Chart/PriceChartContainer'
 import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
 import CurrencyInputHeader from './components/CurrencyInputHeader'
 import ImportTokenWarningModal from '../../components/ImportTokenWarningModal'
@@ -94,10 +77,8 @@ export default function Presale() {
   const loadedUrlParams = useDefaultsFromURLSearch()
   const { t } = useTranslation()
   const { isMobile } = useMatchBreakpoints()
-  const [isChartExpanded, setIsChartExpanded] = useState(false)
   const [userChartPreference, setUserChartPreference] = useExchangeChartManager(isMobile)
   const [isChartDisplayed, setIsChartDisplayed] = useState(userChartPreference)
-  const { refreshBlockNumber, isLoading } = useRefreshBlockNumberID()
 
   useEffect(() => {
     setUserChartPreference(isChartDisplayed)
@@ -375,15 +356,15 @@ export default function Presale() {
               <AppBody>
                 <CurrencyInputHeader
                   title={t('Presale')}
-                  subtitle={t('Buy ASIXMUSIC TOKEN')}
+                  subtitle={t('Buy One Point TOKEN')}
                   setIsChartDisplayed={setIsChartDisplayed}
                   isChartDisplayed={isChartDisplayed}
                   hasAmount={hasAmount}
                   onRefreshPrice={onRefreshPrice}
                 />
-                <Wrapper id="swap-page" style={{ minHeight: '412px' }}>
+                <Wrapper style={{ minHeight: '412px' }}>
                   <AutoColumn gap="sm">
-                    <CurrencyInputPanel
+                    <PresaleCurrencyInputPanel
                       label={
                         independentField === Field.OUTPUT && !showWrap && trade ? t('From (estimated)') : t('From')
                       }
@@ -396,34 +377,12 @@ export default function Presale() {
                       otherCurrency={currencies[Field.OUTPUT]}
                       id="swap-currency-input"
                     />
-
-                    <AutoColumn justify="space-between">
-                      <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
-                        <SwitchIconButton
-                          variant="light"
-                          scale="sm"
-                          onClick={() => {
-                            setApprovalSubmitted(false) // reset 2 step UI for approvals
-                            onSwitchTokens()
-                          }}
-                        >
-                          <ArrowDownIcon
-                            className="icon-down"
-                            color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'primary' : 'text'}
-                          />
-                          <ArrowUpDownIcon
-                            className="icon-up-down"
-                            color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'primary' : 'text'}
-                          />
-                        </SwitchIconButton>
-                        {recipient === null && !showWrap && isExpertMode ? (
-                          <Button variant="text" id="add-recipient-button" onClick={() => onChangeRecipient('')}>
-                            {t('+ Add a send (optional)')}
-                          </Button>
-                        ) : null}
-                      </AutoRow>
-                    </AutoColumn>
-                    <CurrencyInputPanel
+                    <ArrowDownIcon
+                      className="icon-down"
+                      color={currencies[Field.INPUT] && currencies[Field.OUTPUT] ? 'primary' : 'text'}
+                      style={{ marginLeft: '130px' }}
+                    />
+                    <PresaleCurrencyInputPanel
                       value={formattedAmounts[Field.OUTPUT]}
                       onUserInput={handleTypeOutput}
                       label={independentField === Field.INPUT && !showWrap && trade ? t('To (estimated)') : t('To')}
@@ -433,48 +392,8 @@ export default function Presale() {
                       otherCurrency={currencies[Field.INPUT]}
                       id="swap-currency-output"
                     />
-
-                    {isExpertMode && recipient !== null && !showWrap ? (
-                      <>
-                        <AutoRow justify="space-between" style={{ padding: '0 1rem' }}>
-                          <ArrowWrapper clickable={false}>
-                            <ArrowDownIcon width="16px" />
-                          </ArrowWrapper>
-                          <Button variant="text" id="remove-recipient-button" onClick={() => onChangeRecipient(null)}>
-                            {t('- Remove send')}
-                          </Button>
-                        </AutoRow>
-                        <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
-                      </>
-                    ) : null}
-
-                    {showWrap ? null : (
-                      <AutoColumn gap="7px" style={{ padding: '0 16px' }}>
-                        <RowBetween align="center">
-                          {Boolean(trade) && (
-                            <>
-                              <Label>{t('Price')}</Label>
-                              {isLoading ? (
-                                <Skeleton width="100%" ml="8px" height="24px" />
-                              ) : (
-                                <TradePrice
-                                  price={trade?.executionPrice}
-                                  showInverted={showInverted}
-                                  setShowInverted={setShowInverted}
-                                />
-                              )}
-                            </>
-                          )}
-                        </RowBetween>
-                        <RowBetween align="center">
-                          <Label>{t('Slippage Tolerance')}</Label>
-                          <Text bold color="primary">
-                            {allowedSlippage / 100}%
-                          </Text>
-                        </RowBetween>
-                      </AutoColumn>
-                    )}
                   </AutoColumn>
+                  {/* Connect Wallet */}
                   <Box mt="0.25rem">
                     {swapIsUnsupported ? (
                       <Button width="100%" disabled>
@@ -537,7 +456,7 @@ export default function Presale() {
                             ? t('Price Impact High')
                             : priceImpactSeverity > 2
                             ? t('Swap Anyway')
-                            : t('Swap')}
+                            : t('Buy')}
                         </Button>
                       </RowBetween>
                     ) : (
@@ -565,7 +484,7 @@ export default function Presale() {
                             ? t('Price Impact Too High')
                             : priceImpactSeverity > 2
                             ? t('Swap Anyway')
-                            : t('Swap'))}
+                            : t('Buy'))}
                       </Button>
                     )}
                     {showApproveFlow && (
@@ -575,20 +494,11 @@ export default function Presale() {
                     )}
                     {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
                   </Box>
+                  {/* ------------ */}
                 </Wrapper>
               </AppBody>
-              {!swapIsUnsupported ? (
-                trade && <AdvancedSwapDetailsDropdown trade={trade} />
-              ) : (
-                <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} />
-              )}
             </StyledInputCurrencyWrapper>
           </StyledSwapContainer>
-          {isChartExpanded && (
-            <Box display={['none', null, null, 'block']} width="100%" height="100%">
-              <Footer variant="side" helpUrl={EXCHANGE_DOCS_URLS} />
-            </Box>
-          )}
         </Flex>
       </Flex>
     </Page>
