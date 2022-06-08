@@ -7,6 +7,7 @@ interface Props {
   title: string
   subtitle: string
   round: string
+  isMobile: boolean
 }
 
 const PresaleInputContainer = styled(Flex)`
@@ -17,7 +18,7 @@ const PresaleInputContainer = styled(Flex)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `
 
-const PresaleInputHeader: React.FC<Props> = ({ title, subtitle, round }) => {
+const PresaleInputHeader: React.FC<Props> = ({ title, subtitle, round, isMobile }) => {
   const [expertMode] = useExpertModeManager()
 
   return (
@@ -39,6 +40,26 @@ const PresaleInputHeader: React.FC<Props> = ({ title, subtitle, round }) => {
           {subtitle}
         </Text>
       </Flex>
+      {isMobile && (
+        <div>
+          <br />
+          <Flex alignItems="center">
+            <Text color="textSubtle" fontSize="14px">
+              Available Tokens : 450,000,000,000
+            </Text>
+          </Flex>
+          <Flex alignItems="center">
+            <Text color="textSubtle" fontSize="14px">
+              Sold Tokens : 0
+            </Text>
+          </Flex>
+          <Flex alignItems="center">
+            <Text color="textSubtle" fontSize="14px">
+              Token Price : 0.003 BUSD
+            </Text>
+          </Flex>
+        </div>
+      )}
     </PresaleInputContainer>
   )
 }
