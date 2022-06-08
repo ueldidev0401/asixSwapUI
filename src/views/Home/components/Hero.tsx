@@ -109,7 +109,7 @@ const Hero = () => {
       >
         <Flex flex="1" flexDirection="column">
           <Heading scale="xxl" color="secondary" mb="24px">
-            {t('ASIXMUSIC Token')}
+            {t('One Point Token')}
           </Heading>
           <Heading scale="md" mb="24px">
             {t(

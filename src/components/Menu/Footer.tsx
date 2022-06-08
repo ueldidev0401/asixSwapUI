@@ -47,13 +47,13 @@ const Footer: React.FC<{ variant?: FooterVariant; helpUrl?: string }> = ({
   return (
     <Wrapper $isSide={isSide}>
       <Flex flexDirection={isSide ? 'column' : ['column', 'column', 'row']} alignItems="center">
-        <ButtonMenu variant="subtle" scale="sm" activeIndex={0}>
+        {/* <ButtonMenu variant="subtle" scale="sm" activeIndex={0}>
           <ButtonMenuItem>V2</ButtonMenuItem>
           <ButtonMenuItem as="a" href="https://v1exchange.pancakeswap.finance/#/">
             {t('V1 (old)')}
           </ButtonMenuItem>
-        </ButtonMenu>
-        <LinkExternal
+        </ButtonMenu> */}
+        {/* <LinkExternal
           id="ercBridge"
           href="https://docs.binance.org/smart-chain/guides/cross-chain.html"
           ml={[0, 0, '40px']}
@@ -61,9 +61,9 @@ const Footer: React.FC<{ variant?: FooterVariant; helpUrl?: string }> = ({
           mb={['8px', '8px', 0]}
         >
           {t('Convert ERC-20 to BEP-20')}
-        </LinkExternal>
+        </LinkExternal> */}
       </Flex>
-      {isSide && <Flex flexGrow={1} />}
+      {/* {isSide && <Flex flexGrow={1} />}
       <Flex
         flexGrow={isSide ? 0 : 1}
         alignItems="center"
@@ -79,7 +79,7 @@ const Footer: React.FC<{ variant?: FooterVariant; helpUrl?: string }> = ({
           </Svg>
         </BubbleWrapper>
         <Image src="/images/help.png" alt="Get some help" width={160} height={108} />
-      </Flex>
+      </Flex> */}
     </Wrapper>
   )
 }
