@@ -1,0 +1,64 @@
+.timeSpan {
+    font-size: 25px;
+    margin: 0px;
+}
+.timeSpan:first-child {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.timeSpan label {
+    margin: 0px;
+}
+.timeSpan .timeCounter {
+    font-size: 50px;
+    position: relative;
+    padding-right: 5px;
+}
+.timeSpan .timeCounter .timeDisplay {
+    opacity: 1;
+}
+.timeSpan .timeCounter .timeCurrent {
+    opacity: 0;
+}
+.timeSpan .timeCounter .timePreview {
+    opacity: 0;
+}
+.timeSpan .timeCounter .timeAnimation {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.timeSpan .timeCounter.animation .timeDisplay {
+    opacity: 0;
+}
+.timeSpan .timeCounter.animation .timeCurrent {
+    opacity: 1;
+    animation-name: currentAnimation;
+    animation-duration: 0.5s;
+}
+.timeSpan .timeCounter.animation .timePreview {
+    opacity: 1;
+    animation-name: previewAnimation;
+    animation-duration: 0.5s;
+}
+@keyframes previewAnimation {
+    0%   { 
+        opacity: 0;
+        top: 75px;
+    }
+    100% { 
+        opacity: 1;
+        top: 0px;
+    }
+}
+
+@keyframes currentAnimation {
+    0%   { 
+        opacity: 1;
+        top: 0px;
+    }
+    100% { 
+        opacity: 0;
+        top: -75px;
+    }
+}

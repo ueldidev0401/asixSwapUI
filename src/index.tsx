@@ -4,6 +4,7 @@ import useActiveWeb3React from './hooks/useActiveWeb3React'
 import ListsUpdater from './state/lists/updater'
 import MulticallUpdater from './state/multicall/updater'
 import TransactionUpdater from './state/transactions/updater'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export function Updaters() {
   return (

@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Button, Text, ArrowDownIcon, Box, Flex } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
+import { useCookies } from 'react-cookie'
 import { AutoColumn } from '../../components/Layout/Column'
 import { AutoRow } from '../../components/Layout/Row'
 import { Wrapper } from './components/styleds'
 import { AppBody } from '../../components/App'
 import ConnectWalletButton from '../../components/ConnectWalletButton'
 import PresaleInputHeader from './components/PresaleInputHeader'
+import TokenStatus from './components/TokenStatus'
+import TimeTrack from './components/TimeTrack/index'
 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import Page from '../Page'
@@ -91,6 +94,16 @@ export default function Presale() {
 
   const [amount_busd, setAmountBUSD] = useState(0)
   const [amount_OnePoint, setAmountOnePoint] = useState(0)
+
+  const [cookies, setCookies] = useCookies<any>(['user'])
+
+  useEffect(() => {
+    if (!cookies.expiration) {
+      setCookies('expiration', Date.now())
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleAmountBUSDChange = (e) => {
     setAmountBUSD(e.target.value)
     const onePointAmount = e.target.value / OnePointPrice
@@ -113,9 +126,36 @@ export default function Presale() {
     <Page>
       <Flex width="100%" justifyContent="center" position="relative">
         <Flex flexDirection="column">
+          <div className="row" style={{ display: 'flex', marginTop: '20px', marginRight: '10px' }}>
+            <div className="col-lg-4" style={{ padding: '5px' }}>
+              <AppBody>
+                <TokenStatus title={t('Available')} subtitle={t('450,000,000,000')} />
+              </AppBody>
+            </div>
+            <div className="col-lg-4" style={{ padding: '5px' }}>
+              <AppBody>
+                <TokenStatus title={t('Sold')} subtitle={t('0')} />
+              </AppBody>
+            </div>
+            <div className="col-lg-4" style={{ padding: '5px' }}>
+              <AppBody>
+                <TokenStatus title={t('Price')} subtitle={t('0.003BUSD')} />
+              </AppBody>
+            </div>
+          </div>
+          <div className="row" style={{ display: 'flex', marginRight: '10px' }}>
+            <AppBody>
+              <TimeTrack />
+            </AppBody>
+          </div>
+        </Flex>
+        <Flex flexDirection="column">
           <StyledInputCurrencyWrapper mt="24px">
             <AppBody>
               <PresaleInputHeader title={t('Presale')} subtitle={t('Buy One Point TOKEN')} />
+            </AppBody>
+            <AppBody>
+              {/* <PresaleInputHeader title={t('Presale')} subtitle={t('Buy One Point TOKEN')} /> */}
               <Wrapper id="presale-page">
                 {/* BUSD input */}
                 <AutoColumn gap="sm">
