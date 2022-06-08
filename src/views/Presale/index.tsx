@@ -145,7 +145,9 @@ export default function Presale() {
           </div>
           <div className="row" style={{ display: 'flex', marginRight: '10px' }}>
             <AppBody>
-              <TimeTrack />
+              <div style={{ textAlign: 'center' }}>
+                <TimeTrack />
+              </div>
             </AppBody>
           </div>
         </Flex>
