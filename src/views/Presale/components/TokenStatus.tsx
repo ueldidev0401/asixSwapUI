@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Flex, Text } from '@pancakeswap/uikit'
+import { Flex, Text, Heading } from '@pancakeswap/uikit'
 
 interface Props {
   title: string
@@ -19,9 +19,7 @@ const PresaleInputHeader: React.FC<Props> = ({ title, subtitle }) => {
     <PresaleInputContainer>
       <Flex width="100%" alignItems="center" justifyContent="space-between">
         <Flex flexDirection="column" alignItems="center" width="100%">
-          <Text color="white" fontSize="17px" fontWeight="600">
-            {title}
-          </Text>
+          <Heading as="h2">{title}</Heading>
           <Text color="textSubtle" fontSize="14px">
             {subtitle}
           </Text>

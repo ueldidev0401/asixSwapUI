@@ -6,6 +6,7 @@ import { useExpertModeManager } from 'state/user/hooks'
 interface Props {
   title: string
   subtitle: string
+  round: string
 }
 
 const PresaleInputContainer = styled(Flex)`
@@ -16,14 +17,16 @@ const PresaleInputContainer = styled(Flex)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `
 
-const PresaleInputHeader: React.FC<Props> = ({ title, subtitle }) => {
+const PresaleInputHeader: React.FC<Props> = ({ title, subtitle, round }) => {
   const [expertMode] = useExpertModeManager()
 
   return (
     <PresaleInputContainer>
       <Flex width="100%" alignItems="center" justifyContent="space-between">
-        <Flex flexDirection="column" alignItems="flex-end" width="100%" mr={75}>
-          <Heading as="h2">{title}</Heading>
+        <Flex flexDirection="column" alignItems="flex-end" width="100%" mr={30}>
+          <Heading as="h2">
+            {title} ({round})
+          </Heading>
         </Flex>
         <Flex>
           <NotificationDot show={expertMode}>

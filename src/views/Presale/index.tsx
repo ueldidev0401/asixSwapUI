@@ -157,7 +157,7 @@ export default function Presale() {
         <Flex flexDirection="column">
           <StyledInputCurrencyWrapper mt="24px">
             <AppBody>
-              <PresaleInputHeader title={t('Presale')} subtitle={t('Buy One Point TOKEN')} />
+              <PresaleInputHeader title={t('Presale')} subtitle={t('Buy One Point TOKEN')} round={t('Round 1')} />
             </AppBody>
             {isMobile && (
               <AppBody>
