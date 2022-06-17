@@ -125,7 +125,7 @@ const ParaswapComponent = () => {
         getAllowance(token_From!)
       }
     } else {
-      if (symbol === token_From!.symbol) {
+      if (symbol === tokenFrom!.symbol) {
         switched()
       }
       setPriceRoute(undefined)
