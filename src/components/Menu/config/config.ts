@@ -2,8 +2,6 @@ import {
   MenuItemsType,
   SwapIcon,
   SwapFillIcon,
-  EarnFillIcon,
-  EarnIcon,
   TrophyIcon,
   TrophyFillIcon,
   NftIcon,
@@ -28,18 +26,11 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     items: [],
   },
   {
-    label: t('Swap'),
+    label: t('Paraswap'),
     icon: SwapIcon,
     fillIcon: SwapFillIcon,
-    href: '/swap',
+    href: '/paraswap',
     showItemsOnMobile: false,
-    items: [],
-  },
-  {
-    label: t('Farms'),
-    href: '/farms',
-    icon: EarnIcon,
-    fillIcon: EarnFillIcon,
     items: [],
   },
   {
@@ -50,16 +41,11 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     items: [],
   },
   {
-    label: t('NFT'),
+    label: t('Dice Game'),
     href: `${nftsBaseUrl}`,
     icon: NftIcon,
     fillIcon: NftFillIcon,
-    items: [
-      {
-        label: t('Staking'),
-        href: `${nftsBaseUrl}/staking`,
-      },
-    ],
+    items: [],
   },
 ]
 
